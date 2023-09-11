@@ -6,7 +6,7 @@
 /*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:13:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/11 22:15:27 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/11 23:08:34 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@
 #include<stdio.h>
 
 int ft_isalpha(int c);
+int ft_isdigit(int c);
 
 #endif

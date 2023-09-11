@@ -1,6 +1,6 @@
 NAME = myProgram
 
-SRC = main.c ft_isalpha.c
+SRC = main.c ft_isalpha.c ft_isdigit.c
 
 CFLAGS = -Wall -Wextra -Werror
 
