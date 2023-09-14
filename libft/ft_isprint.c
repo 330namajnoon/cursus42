@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 22:13:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/11 23:08:34 by simajnoo         ###   ########.fr       */
+/*   Created: 2023/09/14 20:20:27 by simajnoo          #+#    #+#             */
+/*   Updated: 2023/09/14 20:21:28 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-#define LIBFT_H
-
-#include<string.h>
-#include<stdio.h>
-
-int ft_isalpha(int c);
-int ft_isdigit(int c);
-int ft_isalnum(int c);
-int ft_isascii(int c);
-int ft_isprint(int c);
-size_t  ft_strlen(char *s);
-
-
-#endif
+int	ft_isprint(int c)
+{
+	if(c >= 32 && c <= 126)
+		return (1);
+	return (0);
+}
