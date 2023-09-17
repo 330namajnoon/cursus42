@@ -2,17 +2,15 @@
 
 int main(int argn, char *argv[])
 {
-	char p[20] = "sina";
-	char p1[] = "majnoon";
+	char *p = "+10sina";
+	//char *p1 = "ina";
 	
 
-	size_t len = ft_strlcat(p,p1,7);
+	int res = ft_atoi(p);
 	
-	printf("%s\n",p);
-	printf("%zu\n",len);
+	printf("%d\n",res);
+	//printf("%s",res);
 
-
-	
 	(void)argn;
 	(void)argv;
 	return 0;
