@@ -1,25 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/17 16:07:01 by simajnoo          #+#    #+#             */
+/*   Updated: 2023/09/17 16:08:13 by simajnoo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "libft.h"
 
-int main(int argn, char *argv[])
+int	main(int argn, char *argv[])
 {
-	char *p = "+10sina";
-	char *p1;
-	
+	char	s[5];
 
-	p1 = ft_strdup(p);
-	if(p1)
-	{
-		printf("%s",p1);
-		for (size_t i = 0; i < ft_strlen(p); i++)
-		{
-			
-		}
-		free(p1);
-	}
-	
-	//printf("%s",res);
-
+	ft_strlcpy(s, "hola", 0);
 	(void)argn;
 	(void)argv;
-	return 0;
+	return (0);
 }

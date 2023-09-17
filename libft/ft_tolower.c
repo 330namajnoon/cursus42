@@ -6,14 +6,13 @@
 /*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:26:37 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/17 01:26:39 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:04:05 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
-    if(c >= 'A' && c <= 'Z')
-        return (c - 32);
-    return (c);
+	if (c >= 'A' && c <= 'Z')
+		return (c - 32);
+	return (c);
 }

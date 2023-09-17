@@ -8,10 +8,10 @@ CC = gcc
 
 LIB = ar rcs
 
-
 OBJ = $(SRC:.c=.o)
 
-all = $(NAME)
+
+all : $(NAME)
 
 %.c : %.o
 	$(CC) $(CFLAGS) -c $<

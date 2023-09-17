@@ -6,18 +6,18 @@
 /*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:47:47 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/14 22:48:19 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:46:40 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"libft.h"
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-    char *p;    
-    size_t i;
+	char	*p;
+	size_t	i;
 
-    p = (char*)s;
-    i = -1;
-    while (++i < n)
-        p[i] = 0;
+	p = (char *)s;
+	i = -1;
+	while (++i < n)
+		p[i] = 0;
 }

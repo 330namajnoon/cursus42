@@ -6,16 +6,16 @@
 /*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 19:55:34 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/14 20:01:00 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:48:06 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 int	ft_isalnum(int c)
 {
-	if(ft_isalpha(c))
+	if (ft_isalpha(c))
 		return (1);
-	if(ft_isdigit(c))
+	if (ft_isdigit(c))
 		return (1);
 	return (0);
 }
