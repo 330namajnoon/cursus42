@@ -2,9 +2,18 @@
 
 int main(int argn, char *argv[])
 {
+	char p[20] = "sina";
+	char p1[] = "majnoon";
+	
+
+	size_t len = ft_strlcat(p,p1,7);
+	
+	printf("%s\n",p);
+	printf("%zu\n",len);
+
+
+	
 	(void)argn;
-	printf("%d is assci\n ",ft_isascii(argv[1][0]));
-	printf("%d is printable\n ",ft_isprint(argv[1][0]));
-	printf("%zustrlen\n ",ft_strlen(argv[1]));
+	(void)argv;
 	return 0;
 }
