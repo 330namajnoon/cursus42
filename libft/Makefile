@@ -6,6 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
+LIB = ar rcs
 
 
 OBJ = $(SRC:.c=.o)
@@ -14,9 +15,12 @@ all = $(NAME)
 
 %.c : %.o
 	$(CC) $(CFLAGS) -c $<
-	
+
 
 $(NAME): $(OBJ)
+	$(LIB) $@ $^
+
+comp: $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
