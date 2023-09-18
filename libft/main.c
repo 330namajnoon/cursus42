@@ -13,9 +13,9 @@
 
 int	main(int argn, char *argv[])
 {
-	char	s[5];
-
-	ft_strlcpy(s, "hola", 0);
+	char str[] = "sina majnoon";
+	char c = '\0';
+	printf("%s",ft_strchr(str,c));
 	(void)argn;
 	(void)argv;
 	return (0);

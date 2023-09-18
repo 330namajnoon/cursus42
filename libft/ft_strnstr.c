@@ -20,7 +20,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	haystack1 = (char *)haystack;
 	while (*haystack != 0 && len > 1)
 	{
-		while (*haystack == *needle && *needle != 0)
+		while (*haystack == *needle && *needle != 0 && len > 1)
 		{
 			haystack++;
 			needle++;
