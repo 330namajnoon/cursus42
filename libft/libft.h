@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:13:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/17 16:05:29 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/22 21:53:38 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ int		ft_atoi(const char *str);
 
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
+
+char	**ft_split(char const *s, char c);
 
 #endif
