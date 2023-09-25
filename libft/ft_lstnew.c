@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 16:07:01 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/25 22:54:19 by simajnoo         ###   ########.fr       */
+/*   Created: 2023/09/26 01:35:43 by simajnoo          #+#    #+#             */
+/*   Updated: 2023/09/26 01:36:06 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	main(int argn, char *argv[])
+t_list	*ft_lstnew(void *content)
 {
-	char	*str;
-
-	str = ft_itoa(ft_atoi(argv[1]));
-	printf("%s\n", str);
-	free(str);
-	(void)argn;
-	(void)argn;
-	return (0);
+	
 }

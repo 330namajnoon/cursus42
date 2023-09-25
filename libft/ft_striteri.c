@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 16:07:01 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/25 22:54:19 by simajnoo         ###   ########.fr       */
+/*   Created: 2023/09/26 00:22:50 by simajnoo          #+#    #+#             */
+/*   Updated: 2023/09/26 00:31:36 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	main(int argn, char *argv[])
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*str;
+	unsigned int	i;
 
-	str = ft_itoa(ft_atoi(argv[1]));
-	printf("%s\n", str);
-	free(str);
-	(void)argn;
-	(void)argn;
-	return (0);
+	i = -1;
+	while (s[++i] != 0)
+		f(i, &s[i]);
 }
