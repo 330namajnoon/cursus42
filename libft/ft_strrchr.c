@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:12:28 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/17 16:02:44 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:58:16 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
@@ -17,6 +18,8 @@ char	*ft_strrchr(const char *s, int c)
 	char	*ss;
 	int		i;
 
+	if (c > 255)
+		c = c % 256;
 	i = 1;
 	cc = 0;
 	ss = (char *)s;

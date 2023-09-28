@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 10:56:52 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/24 04:16:33 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:00:34 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (c > 255)
+		c = c % 256;
 	while (1)
 	{
 		if (*s == c)
