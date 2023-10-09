@@ -53,7 +53,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	struct s_resdata	resdata;
 
 	resdata = get_res_data(s1, set);
-	res = (char *)malloc((resdata.end + 1) * sizeof(char));
+	if (resdata.start >= resdata.end)
+		return (ft_strdup(""));
+	res = (char *)malloc(((resdata.end - resdata.start) + 1) * sizeof(char));
 	if (!res)
 		return (FT_NULL);
 	vars[0] = resdata.start - 1;
