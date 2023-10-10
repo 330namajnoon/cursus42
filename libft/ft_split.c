@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -12,108 +13,108 @@
 
 #include "libft.h"
 
-struct		s_get_list_vars
-{
-	int		i;
-	int		j;
-	int		start;
-	int		end;
-	t_list	*list;
-	t_list	*newlist;
-	char	*strsub;
+struct	s_reslen {
+	char	**res;
+	int		*len;
 };
 
-void	del(void *val)
+void	set_vars(int *vars)
 {
-	free(val);
+	vars[1] = 0;
+	vars[2] = 1;
+	vars[3] = 0;
+	vars[4] = 0;
 }
 
-t_list	*get_list(char const *s, char c)
+int	*set_lens(int *vars, int *lens, const char *s, char c)
 {
-	struct s_get_list_vars	vs;
-
-	vs.list = FT_NULL;
-	vs.i = 0;
-	while (s[vs.i] != 0 && s[vs.i] == c)
-		vs.i++;
-	vs.start = vs.i;
-	while (s[vs.i] != 0)
+	if (vars[5])
+		vars[0]--;
+	if (!lens)
+		return (FT_NULL);
+	else
+		lens[0] = vars[0];
+	set_vars(vars);
+	while (s[vars[1]] == c && s[vars[1]] != 0)
+		vars[1]++;
+	while (s[vars[1]] != 0)
 	{
-		vs.j = 0;
-		while (s[vs.i] == c)
+		if (s[vars[1]] == c)
+			vars[3] = 1;
+		else if (vars[3] == 1)
 		{
-			if (vs.j == 0)
-				vs.end = vs.i - vs.start;
-			vs.j++;
-			vs.i++;
+			vars[2]++;
+			vars[3] = 0;
 		}
-		if (vs.j > 0)
-		{
-			vs.strsub = ft_substr(s, vs.start, vs.end);
-			if (!vs.strsub)
-				return (FT_NULL);
-			vs.newlist = ft_lstnew(vs.strsub);
-			if (!vs.newlist)
-				return (FT_NULL);
-			ft_lstadd_back(&vs.list, vs.newlist);
-			vs.start = vs.i;
-		}
-		if (s[vs.i] != 0)
-			vs.i++;
+		if (vars[3] == 0)
+			lens[vars[2]]++;
+		vars[1]++;
 	}
-	vs.strsub = ft_substr(s, vs.start, vs.i - vs.start);
-	if (!vs.strsub)
-		return (FT_NULL);
-	vs.newlist = ft_lstnew(vs.strsub);
-	if (!vs.newlist)
-		return (FT_NULL);
-	ft_lstadd_back(&vs.list, vs.newlist);
-	return (vs.list);
+	return (lens);
 }
 
-void	*ft_free(char **s)
+int	*lens(int *vars, const char *s, char c)
 {
-	int	i;
+	int	*lens;
 
-	i = -1;
-	while (s[++i] != 0)
-		free(s[i]);
-	free(s);
-	return (FT_NULL);
+	while (s[vars[1]] == c && s[vars[1]] != 0)
+		vars[1]++;
+	if (s[vars[1]] == 0)
+		vars[5] = 1;
+	while (s[vars[1]] != 0)
+	{
+		if (s[vars[1]] == c)
+			vars[3] = 1;
+		else if (vars[3] == 1)
+		{
+			while (s[vars[1]] == c)
+				vars[1]++;
+			vars[0]++;
+			vars[3] = 0;
+		}
+		vars[1]++;
+	}
+	lens = (int *)calloc(vars[0] + 1, sizeof(int));
+	if (!set_lens(vars, lens, s, c))
+		return (FT_NULL);
+	return (lens);
+}
+
+void	set_res(struct s_reslen rl, int *vs, const char *s, char c)
+{
+	vs[0] = -1;
+	vs[3] = 0;
+	vs[1] = 0;
+	while (s[vs[3]] == c)
+		vs[3]++;
+	while (++vs[1] <= rl.len[0])
+	{
+		vs[2] = -1;
+		rl.res[++vs[0]] = (char *)malloc((rl.len[vs[1]] + 1) * sizeof(char));
+		while (++vs[2] < rl.len[vs[1]])
+			rl.res[vs[0]][vs[2]] = s[vs[3]++];
+		rl.res[vs[0]][vs[2]] = 0;
+		while (s[vs[3]] == c)
+			vs[3]++;
+	}
+	rl.res[++vs[0]] = FT_NULL;
+	free(rl.len);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**res;
-	int		res_len;
-	int		i;
-	t_list	*list;
-	t_list	*list_;
+	struct s_reslen	res_len;
+	int				vars[6];
 
-	list = get_list(s, c);
-	if (!list)
+	vars[5] = 0;
+	vars[0] = 1;
+	vars[1] = 0;
+	res_len.len = lens(vars, s, c);
+	if (!res_len.len)
 		return (FT_NULL);
-	list_ = list;
-	res_len = ft_lstsize(list) + 1;
-	printf("%d\n",res_len);
-	if (!ft_strlen((char *)list_->content))
-		res_len = 1;
-	res = (char **)malloc((res_len) * sizeof(char *));
-	if (!res)
+	res_len.res = (char **)malloc((res_len.len[0] + 1) * sizeof(char *));
+	if (!res_len.res)
 		return (FT_NULL);
-	i = 0;
-	while (list_ && ft_strlen((char *)list_->content))
-	{
-		res[i] = ft_strdup(list_->content);
-		if (!res[i])
-			return (ft_free(res));
-		list_ = list_->next;
-		i++;
-	}
-	ft_lstclear(&list, del);
-	free(list);
-	res[i] = FT_NULL;
-	return (res);
+	set_res(res_len, vars, s, c);
+	return (res_len.res);
 }
-
-

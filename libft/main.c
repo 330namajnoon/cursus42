@@ -22,7 +22,9 @@ int	main(int argn, char *argv[])
 	while (res[++i])
 	{
 		printf("%d : %s\n",i, res[i]);
+		
 	}
+	printf("%ld %ld :: %s\n",sizeof(char *) * 3,sizeof(res), res[i]);
 	i = -1;
 	while (res[++i])
 		free(res[i]);
