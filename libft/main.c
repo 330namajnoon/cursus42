@@ -6,30 +6,34 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:07:01 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/29 00:09:18 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/10/10 01:17:46 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	del(void *c)
-{
-	(void)c;	
-}
-void	*f(void *c)
-{
-	return (c);
-}
-
 int	main(int argn, char *argv[])
 {
-	char	*str;
-	char	*str1;
+	char	**res;
+	int		i;
 
-	str1 = ft_strtrim(argv[1], argv[2]);
-	str = ft_strtrim(argv[1], argv[2]);
-	printf("%s\n", str1);
-	free(str);
+	res = ft_split(argv[1], argv[2][0]);
+	i = -1;
+	while (res[++i])
+	{
+		printf("%d : %s\n",i, res[i]);
+	}
+	i = -1;
+	while (res[++i])
+		free(res[i]);
+	free(res);
+
+	// char	*s;
+
+	// s = ft_strnstr(argv[1], argv[2], ft_atoi(argv[3]));
+	// printf("res: %s\n", s);
+	// s = strnstr(argv[1], argv[2], ft_atoi(argv[3]));
+	// printf("res1: %s\n", s);
 	// bonus
 
 	// t_list	*lst;
