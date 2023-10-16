@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 17:35:52 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/16 19:23:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*rest_to_res(char *res)
 	len = -1;
 	while ((data.rest)[++len])
 		if (!pos && (data.rest)[len] == '\n')
-			pos = len;
+			pos = len + 1;
 	size = pos;
 	if (!pos)
 		size = ft_strlen(data.rest);
@@ -82,9 +82,16 @@ char	*rest_to_res(char *res)
 	if (!res)
 		return (FT_NULL);
 	i = -1;
-	while ((data.rest)[++i] != '\n' && data.rest[i])
+	do
+	{
+		i++;
 		res[i] = (data.rest)[i];
+	} while ((data.rest)[i] != '\n' && data.rest[i]);
+	if (data.rest[i])
+		i++;
 	res[i] = 0;
+	if (pos)
+		pos--;
 	if (!reset_rest(pos, len))
 		return (FT_NULL);
 	return (res);
@@ -141,7 +148,6 @@ char	*get_next_line(int fd)
 			t = -1;
 			while ((data.rest)[++t])
 			{
-				printf("_%d_\n", t);
 				if ((data.rest)[t] == '\n')
 				{
 					t = -1;
