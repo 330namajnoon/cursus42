@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 22:06:30 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 14:02:07 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/16 23:24:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }				t_list;
-
-
-struct	s_data	data;
 
 char	*get_next_line(int fd);
 t_list	*ft_lstnew(void *content);
