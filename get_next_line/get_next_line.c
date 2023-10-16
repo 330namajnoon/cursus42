@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/12 06:22:44 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:35:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,80 +33,130 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
+char	*reset_rest(int start, int end)
+{
+	int		i;
+	char	*cpy;
+
+	if (start > 0)
+		cpy = (char *)malloc(end);
+	else
+	{
+		free(data.rest);
+		data.rest = (char *)malloc(1);
+		if (!data.rest)
+			return (FT_NULL);
+		data.rest[0] = 0;
+		return (data.rest);
+	}
+	if (!cpy)
+		return (FT_NULL);
+	i = 0;
+	while ((data.rest)[++start])
+	{
+		cpy[i] = (data.rest)[start];
+		i++;
+	}
+	cpy[i] = 0;
+	free(data.rest);
+	data.rest = cpy;
+	return (data.rest);
+}
+
+char	*rest_to_res(char *res)
+{
+	int	pos;
+	int	len;
+	int	size;
+	int	i;
+
+	pos = 0;
+	len = -1;
+	while ((data.rest)[++len])
+		if (!pos && (data.rest)[len] == '\n')
+			pos = len;
+	size = pos;
+	if (!pos)
+		size = ft_strlen(data.rest);
+	res = (char *)malloc(size + 1);
+	if (!res)
+		return (FT_NULL);
+	i = -1;
+	while ((data.rest)[++i] != '\n' && data.rest[i])
+		res[i] = (data.rest)[i];
+	res[i] = 0;
+	if (!reset_rest(pos, len))
+		return (FT_NULL);
+	return (res);
+}
+
 char	*get_next_line(int fd)
 {
-	char		*res;
-	ssize_t		b_read;
-	t_list		*list;
-	t_list		*newlist;
-	char		*content;
-	size_t		t;
+	char	*res;
+	char	*cpy;
+	int		b_read;
+	int		t;
 
-	t = 1;
-	list = FT_NULL;
-	if (data.rest)
+	(void)fd;
+	res = "";
+	if (!data.rest)
 	{
-		newlist = ft_lstnew(data.rest);
-		if (!newlist)
-		{
-			ft_lstclear(&list);
+		data.rest = (char *)malloc(1);
+		if (!data.rest)
 			return (FT_NULL);
-		}
-		ft_lstadd_back(&list, newlist);
+		*(data.rest) = 0;
 	}
-	while (t)
+	while (1)
 	{
 		b_read = read(fd, data.buffer, sizeof(data.buffer));
-		content = ft_strdup(data.buffer);
-		if (!content)
+		if (b_read == -1)
 		{
-			ft_lstclear(&list);
+			free(data.rest);
 			return (FT_NULL);
 		}
-		newlist = ft_lstnew(content);
-		if (!newlist)
+		else if (b_read)
 		{
-			ft_lstclear(&list);
-			return (FT_NULL);
+			cpy = ft_strjoin(data.rest, data.buffer);
+			free(data.rest);
+			data.rest = cpy;
+			t = -1;
+			while ((data.rest)[++t])
+			{
+				if ((data.rest)[t] == '\n')
+				{
+					t = -1;
+					break ;
+				}
+			}
+			if (t == -1)
+			{
+				res = rest_to_res(res);
+				if (!res)
+					return (FT_NULL);
+				break ;
+			}
 		}
-		ft_lstadd_back(&list, newlist);
-		if (ft_strchr(data.buffer, '\n'))
+		else
 		{
-			t = 0;
-			while (content[t] != '\n')
-				t++;
-			data.rest = &content[t+1];
-			t = 0;
+			t = -1;
+			while ((data.rest)[++t])
+			{
+				printf("_%d_\n", t);
+				if ((data.rest)[t] == '\n')
+				{
+					t = -1;
+					break ;
+				}
+			}
+			if (t == -1 || !data.rest[t])
+			{
+				res = rest_to_res(res);
+				if (!res)
+					return (FT_NULL);
+				break ;
+			}
+			break ;
 		}
 	}
-	newlist = list;
-	data.len = 0;
-	while (newlist)
-	{
-		t = 0;
-		while (((char *)newlist->content)[t] != '\n' &&
-			((char *)newlist->content)[t] != 0)
-		{
-			t++;
-			data.len++;
-		}
-		newlist = newlist->next;
-	}
-	res = (char *)malloc(data.len + 1);
-	newlist = list;
-	data.len = -1;
-	while (newlist)
-	{
-		t = 0;
-		while (((char *)newlist->content)[t] != '\n' &&
-			((char *)newlist->content)[t] != 0)
-		{
-			res[++data.len] = ((char *)newlist->content)[t];
-			t++;
-		}
-		newlist = newlist->next;
-	}
-	res[data.len+1] = 0;
-	ft_lstclear(&newlist);
 	return (res);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 03:27:01 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/12 05:20:22 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:01:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,42 @@ char	*ft_strchr(const char *s, int c)
 		s++;
 	}
 	return (FT_NULL);
+}
+
+size_t	ft_strlen(char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] != 0)
+		len++;
+	return (len);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char			*res;
+	unsigned int	varl[3];
+
+	varl[1] = ft_strlen ((char *)s1);
+	varl[2] = ft_strlen ((char *)s2);
+	res = (char *)malloc ((varl[1] + varl[2] + 1) * sizeof (char));
+	if (!res)
+		return (FT_NULL);
+	varl[0] = -1;
+	while (++varl[0] < varl[1] + varl[2])
+	{
+		if (*s1 != 0)
+		{
+			res[varl[0]] = *s1;
+			s1++;
+		}
+		else if (*s2 != 0)
+		{
+			res[varl[0]] = *s2;
+			s2++;
+		}
+	}
+	res[varl[0]] = 0;
+	return (res);
 }

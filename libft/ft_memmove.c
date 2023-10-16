@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 21:06:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 17:00:19 by codespace        ###   ########.fr       */
+/*   Created: 2023/10/10 21:53:24 by codespace         #+#    #+#             */
+/*   Updated: 2023/10/10 22:15:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-int	main(int argn, char *argv[])
+void	*ft_memmove(void *dest, void const *src, size_t n)
 {
-	int		file;
-	char	*res;
+	unsigned char		*d;
+	unsigned const char	*s;
 
-	file = open(argv[1], 0);
-	if (file == -1)
-		return (0);
-	for (size_t i = 0; i < (unsigned int)atoi(argv[2]); i++)
+	d = (unsigned char *)dest;
+	s = (unsigned const char *)src;
+	if (d == s)
+		return (dest);
+	if (s < d && d < s + n)
 	{
-		res = get_next_line(file);
-		if (!res)
-			return (1);
-		printf("%s\n", res);
-		free(res);
+		s += n;
+		d += n;
+		while (n--)
+			*(--d) = *(--s);
 	}
-	close(file);
-	(void)argn;
-	(void)argv;
-	return (0);
+	else
+	{
+		while (n--)
+			*d++ = *s++;
+	}
+	return (dest);
 }
