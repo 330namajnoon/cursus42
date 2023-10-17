@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 22:27:21 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 22:55:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ char	*get_next_line(int fd)
 	static t_data	data;
 	t_vars vs;
 
-	(void)fd;
 	if (!data.rest)
 	{
 		data.rest = ft_strjoin("", "");
@@ -131,13 +130,16 @@ char	*get_next_line(int fd)
 				vs.res = rest_to_res(&data, ft_strlen(data.rest));
 				if (!vs.res)
 					return (FT_NULL);
+				free(data.rest);
 				break ;
 			}
 			break ;
 		}
 		else
 		{
-			break ;
+			if (data.rest)
+				free(data.rest);
+			return (FT_NULL);
 		}
 	}
 	return (vs.res);
