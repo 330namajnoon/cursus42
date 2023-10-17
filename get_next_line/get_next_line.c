@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 00:42:40 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 22:27:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,26 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
-char	*rest_to_res(t_data data)
+char	*rest_to_res(t_data *data,unsigned int pos)
 {
-	
-	
-	return (FT_NULL);
+	char	*res;
+	char	*rest;
+
+	res = ft_substr(data->rest, 0, pos + 1);
+	rest = ft_substr(data->rest, pos + 1, ft_strlen(data->rest) - 1);
+	if (!res && rest)
+	{
+		free(rest);
+		return (FT_NULL);
+	}
+	else if (!rest && res)
+	{
+		free(res);
+		return (FT_NULL);
+	}
+	free(data->rest);
+	data->rest = rest;
+	return (res);
 }
 
 
@@ -62,25 +77,62 @@ char	*get_next_line(int fd)
 			vs.cpy = ft_strjoin(data.rest, data.buffer);
 			if (!vs.cpy)
 				return (FT_NULL);
-			vs.t = -1;
 			free(data.rest);
 			data.rest = vs.cpy;
 			// resetear buffer
+			vs.t = -1;
 			while (data.buffer[++vs.t])
 				data.buffer[vs.t] = 0;
 			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest, lo pone en variable rest.
 			vs.t = -1;
-			while (/* condition */)
+			vs.i = -1;
+			while (data.rest[++vs.i])
 			{
-				/* code */
+				if (data.rest[vs.i] == '\n')
+				{
+					vs.t = vs.i;
+					break ;
+				}
 			}
-			
-			vs.res = rest_to_res(data);
-			if (vs.res)
+			// si vs.t es igual que 0 significa que no hay un \n en data.rest y tiene que volver a rellenar buffer otra vez hasta que tenga un \n.
+			// y si es mayor que 0 llama a funcion rest_to rest.
+			if (vs.t != -1)
+			{
+				vs.res = rest_to_res(&data, vs.t);
+				if (!vs.res)
+					return (FT_NULL);
 				break ;
+			}
 		}
 		else if (vs.b_read == 0)
 		{
+			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest, lo pone en variable rest.
+			vs.t = -1;
+			vs.i = -1;
+			while (data.rest[++vs.i])
+			{
+				if (data.rest[vs.i] == '\n')
+				{
+					vs.t = vs.i;
+					break ;
+				}
+			}
+			// si vs.t es igual que 0 significa que no hay un \n en data.rest y tiene que volver a rellenar buffer otra vez hasta que tenga un \n.
+			// y si es mayor que 0 llama a funcion rest_to rest.
+			if (vs.t != -1)
+			{
+				vs.res = rest_to_res(&data, vs.t);
+				if (!vs.res)
+					return (FT_NULL);
+				break ;
+			}
+			else
+			{
+				vs.res = rest_to_res(&data, ft_strlen(data.rest));
+				if (!vs.res)
+					return (FT_NULL);
+				break ;
+			}
 			break ;
 		}
 		else
@@ -88,6 +140,5 @@ char	*get_next_line(int fd)
 			break ;
 		}
 	}
-	printf("%s", data.rest);
-	return ("");
+	return (vs.res);
 }

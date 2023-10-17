@@ -6,11 +6,35 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 03:27:01 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 14:01:57 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 20:16:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*res;
+	unsigned int	i;
+
+	if (s[0] == 0 || len <= 0 || start > ft_strlen((char *)s))
+		return (ft_strjoin("", ""));
+	if (start + len > ft_strlen((char *)s))
+		len = ft_strlen((char *)s) - start;
+	res = (char *)malloc((len + 1) * sizeof(char));
+	if (!res)
+		return (FT_NULL);
+	i = -1;
+	{
+		while (++i < len && s[start] != 0)
+		{
+			res[i] = s[start];
+			start++;
+		}
+	}
+	res[i] = 0;
+	return (res);
+}
 
 t_list	*ft_lstnew(void *content)
 {

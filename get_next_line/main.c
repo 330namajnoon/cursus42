@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 21:06:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 23:23:30 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 21:47:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argn, char *argv[])
 		res = get_next_line(file);
 		if (!res)
 			break;
-		//printf("%s", res);
-		//free(res);
+		printf("%s", res);
+		free(res);
 	}
 	close(file);
 	(void)argn;
