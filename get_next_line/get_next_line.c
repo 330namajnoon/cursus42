@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 23:05:32 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 23:11:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ char	*get_next_line(int fd)
 		}
 		else if (vs.b_read == 0)
 		{
+			if (!*data.rest)
+				return (free(data.rest), FT_NULL);
 			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest, lo pone en variable rest.
 			vs.t = -1;
 			vs.i = -1;
