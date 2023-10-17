@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 19:23:49 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 00:52:38 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,9 @@ char	*get_next_line(int fd)
 			cpy = ft_strjoin(data.rest, data.buffer);
 			free(data.rest);
 			data.rest = cpy;
+			t = -1;
+			while (data.buffer[++t])
+				data.buffer[t] = 0;
 			t = -1;
 			while ((data.rest)[++t])
 			{
