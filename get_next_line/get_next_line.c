@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 00:52:38 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 01:02:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
-char	*reset_rest(int start, int end)
+char	*reset_rest(t_data *data, int start, int end)
 {
 	int		i;
 	char	*cpy;
@@ -42,28 +42,28 @@ char	*reset_rest(int start, int end)
 		cpy = (char *)malloc(end);
 	else
 	{
-		free(data.rest);
-		data.rest = (char *)malloc(1);
-		if (!data.rest)
+		free(data->rest);
+		data->rest = (char *)malloc(1);
+		if (!data->rest)
 			return (FT_NULL);
-		data.rest[0] = 0;
-		return (data.rest);
+		data->rest[0] = 0;
+		return (data->rest);
 	}
 	if (!cpy)
 		return (FT_NULL);
 	i = 0;
-	while ((data.rest)[++start])
+	while ((data->rest)[++start])
 	{
-		cpy[i] = (data.rest)[start];
+		cpy[i] = (data->rest)[start];
 		i++;
 	}
 	cpy[i] = 0;
-	free(data.rest);
-	data.rest = cpy;
-	return (data.rest);
+	free(data->rest);
+	data->rest = cpy;
+	return (data->rest);
 }
 
-char	*rest_to_res(char *res)
+char	*rest_to_res(t_data *data, char *res)
 {
 	int	pos;
 	int	len;
@@ -72,12 +72,12 @@ char	*rest_to_res(char *res)
 
 	pos = 0;
 	len = -1;
-	while ((data.rest)[++len])
-		if (!pos && (data.rest)[len] == '\n')
+	while ((data->rest)[++len])
+		if (!pos && (data->rest)[len] == '\n')
 			pos = len + 1;
 	size = pos;
 	if (!pos)
-		size = ft_strlen(data.rest);
+		size = ft_strlen(data->rest);
 	res = (char *)malloc(size + 1);
 	if (!res)
 		return (FT_NULL);
@@ -85,24 +85,25 @@ char	*rest_to_res(char *res)
 	do
 	{
 		i++;
-		res[i] = (data.rest)[i];
-	} while ((data.rest)[i] != '\n' && data.rest[i]);
-	if (data.rest[i])
+		res[i] = (data->rest)[i];
+	} while ((data->rest)[i] != '\n' && data->rest[i]);
+	if (data->rest[i])
 		i++;
 	res[i] = 0;
 	if (pos)
 		pos--;
-	if (!reset_rest(pos, len))
+	if (!reset_rest(data, pos, len))
 		return (FT_NULL);
 	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*res;
-	char	*cpy;
-	int		b_read;
-	int		t;
+	static t_data	data;
+	char			*res;
+	char			*cpy;
+	int				b_read;
+	int				t;
 
 	(void)fd;
 	res = "";
@@ -140,7 +141,7 @@ char	*get_next_line(int fd)
 			}
 			if (t == -1)
 			{
-				res = rest_to_res(res);
+				res = rest_to_res(&data, res);
 				if (!res)
 					return (FT_NULL);
 				break ;
@@ -159,7 +160,7 @@ char	*get_next_line(int fd)
 			}
 			if (t == -1 || !data.rest[t])
 			{
-				res = rest_to_res(res);
+				res = rest_to_res(&data, res);
 				if (!res)
 					return (FT_NULL);
 				break ;
