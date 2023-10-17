@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 23:03:48 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 23:05:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,6 @@ char	*get_next_line(int fd)
 				vs.res = rest_to_res(&data, ft_strlen(data.rest));
 				if (!vs.res)
 					return (FT_NULL);
-				if (data.rest)
-					free(data.rest);
 				break ;
 			}
 			break ;
