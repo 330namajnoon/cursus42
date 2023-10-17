@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 22:06:30 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 23:24:58 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 00:35:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@
 #  define BUFFER_SIZE 100
 # endif
 
-struct	s_data{
+typedef struct	s_data{
 	char	buffer[BUFFER_SIZE];
 	char	*rest;
 	size_t	len;
-};
+}				t_data;
+
+typedef struct	s_vars{
+	int		b_read;
+	int		t;
+	char	*cpy;
+	char	*res;
+}			t_vars;
 
 typedef struct s_list
 {

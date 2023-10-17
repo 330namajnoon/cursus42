@@ -6,13 +6,12 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/16 23:48:07 by codespace        ###   ########.fr       */
+/*   Updated: 2023/10/17 00:42:40 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static struct	s_data	data;
 
 char	*ft_strdup(const char *s1)
 {
@@ -34,11 +33,19 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
+char	*rest_to_res(t_data data)
+{
+	
+	
+	return (FT_NULL);
+}
+
 
 char	*get_next_line(int fd)
 {
-	int	b_read;
-	int t;
+	static t_data	data;
+	t_vars vs;
+
 	(void)fd;
 	if (!data.rest)
 	{
@@ -48,15 +55,31 @@ char	*get_next_line(int fd)
 	}
 	while (1)
 	{
-		b_read = read(fd, data.buffer, sizeof(data.buffer));
-		if (b_read)
+		vs.b_read = read(fd, data.buffer, sizeof(data.buffer));
+		if (vs.b_read)
 		{
-			printf("\n:%s:\n", data.buffer);
-			t = -1;
-			while (data.buffer[++t])
-				data.buffer[t] = 0;
+			// si b_read es mayor que 0, anade el buffer a data.rest
+			vs.cpy = ft_strjoin(data.rest, data.buffer);
+			if (!vs.cpy)
+				return (FT_NULL);
+			vs.t = -1;
+			free(data.rest);
+			data.rest = vs.cpy;
+			// resetear buffer
+			while (data.buffer[++vs.t])
+				data.buffer[vs.t] = 0;
+			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest, lo pone en variable rest.
+			vs.t = -1;
+			while (/* condition */)
+			{
+				/* code */
+			}
+			
+			vs.res = rest_to_res(data);
+			if (vs.res)
+				break ;
 		}
-		else if (b_read == 0)
+		else if (vs.b_read == 0)
 		{
 			break ;
 		}
@@ -65,6 +88,6 @@ char	*get_next_line(int fd)
 			break ;
 		}
 	}
-	
+	printf("%s", data.rest);
 	return ("");
 }
