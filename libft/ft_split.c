@@ -12,108 +12,112 @@
 
 #include "libft.h"
 
-struct	s_reslen {
-	char	**res;
-	int		*len;
-};
-
-void	set_vars(int *vars)
+int	counter(char *str, char c)
 {
-	vars[1] = 0;
-	vars[2] = 1;
-	vars[3] = 0;
-	vars[4] = 0;
+	int	i;
+	int	ctr;
+
+	i = 0;
+	ctr = 0;
+	if (ft_strncmp(str, "", 1) == 0)
+		return (0);
+	while (str[i] == c)
+		i++;
+	if (str[i] == 0)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == c)
+		{
+			while (str[i + 1] == c)
+				i++;
+			if (str[i + 1] != 0)
+				ctr++;
+		}
+		i++;
+	}
+	return (ctr + 1);
 }
 
-int	*set_lens(int *vars, int *lens, const char *s, char c)
+void	*free_mem(char **table)
 {
-	if (vars[5])
-		vars[0]--;
-	if (!lens)
-		return (FT_NULL);
+	int	i;
+
+	i = -1;
+	while (table[++i])
+		free(table[i]);
+	free(table);
+	return (NULL);
+}
+
+int	getminmax(char *s, char c, int ismax)
+{
+	int	i;
+
+	if (ismax)
+	{
+		if (ft_strlen(s) == 0)
+			return (0);
+		i = ft_strlen(s) - 1;
+		while (s[i] == c)
+			i--;
+		return (i + 1);
+	}
 	else
-		lens[0] = vars[0];
-	set_vars(vars);
-	while (s[vars[1]] == c && s[vars[1]] != 0)
-		vars[1]++;
-	while (s[vars[1]] != 0)
 	{
-		if (s[vars[1]] == c)
-			vars[3] = 1;
-		else if (vars[3] == 1)
+		i = 0;
+		while (s[i] == c)
+			i++;
+		return (i - 1);
+	}
+}
+
+char	**fill_table(char **table, char *s, char c)
+{
+	int	vars[3];
+
+	vars[1] = 0;
+	vars[2] = 0;
+	vars[0] = getminmax(s, c, 0);
+	while (++vars[0] < getminmax(s, c, 1))
+	{
+		if (s[vars[0]] == c)
 		{
+			table[vars[2]] = ft_substr(s, vars[0] - vars[1], vars[1]);
+			if (!table[vars[2]])
+				return (free_mem(table));
 			vars[2]++;
-			vars[3] = 0;
+			vars[1] = 0;
+			while (s[vars[0] + 1] == c)
+				vars[0]++;
 		}
-		if (vars[3] == 0)
-			lens[vars[2]]++;
-		vars[1]++;
+		else
+			vars[1]++;
 	}
-	return (lens);
-}
-
-int	*lens(int *vars, const char *s, char c)
-{
-	int	*lens;
-
-	while (s[vars[1]] == c && s[vars[1]] != 0)
-		vars[1]++;
-	if (s[vars[1]] == 0)
-		vars[5] = 1;
-	while (s[vars[1]] != 0)
-	{
-		if (s[vars[1]] == c)
-			vars[3] = 1;
-		else if (vars[3] == 1)
-		{
-			while (s[vars[1]] == c)
-				vars[1]++;
-			vars[0]++;
-			vars[3] = 0;
-		}
-		vars[1]++;
-	}
-	lens = (int *)calloc(vars[0] + 1, sizeof(int));
-	if (!set_lens(vars, lens, s, c))
-		return (FT_NULL);
-	return (lens);
-}
-
-void	set_res(struct s_reslen rl, int *vs, const char *s, char c)
-{
-	vs[0] = -1;
-	vs[3] = 0;
-	vs[1] = 0;
-	while (s[vs[3]] == c)
-		vs[3]++;
-	while (++vs[1] <= rl.len[0])
-	{
-		vs[2] = -1;
-		rl.res[++vs[0]] = (char *)malloc((rl.len[vs[1]] + 1) * sizeof(char));
-		while (++vs[2] < rl.len[vs[1]])
-			rl.res[vs[0]][vs[2]] = s[vs[3]++];
-		rl.res[vs[0]][vs[2]] = 0;
-		while (s[vs[3]] == c)
-			vs[3]++;
-	}
-	rl.res[++vs[0]] = FT_NULL;
-	free(rl.len);
+	table[vars[2]] = ft_substr(s, vars[0] - vars[1], vars[1]);
+	if (!table[vars[2]])
+		return (free_mem(table));
+	table[vars[2] + 1] = NULL;
+	return (table);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	struct s_reslen	res_len;
-	int				vars[6];
+	char	**table;
+	int		x_size;
+	char	*str;
 
-	vars[5] = 0;
-	vars[0] = 1;
-	vars[1] = 0;
-	res_len.len = lens(vars, s, c);
-	if (!res_len.len)
-		return (FT_NULL);
-	res_len.res = (char **)malloc((res_len.len[0] + 1) * sizeof(char *));
-	if (!res_len.res)
-		return (FT_NULL);
-	set_res(res_len, vars, s, c);
-	return (res_len.res);
+	if (!s)
+		return (NULL);
+	str = (char *)s;
+	x_size = counter(str, c) + 1;
+	table = (char **)ft_calloc(x_size, sizeof(char *));
+	if (!table)
+		return (NULL);
+	if (x_size == 1)
+	{
+		table[0] = NULL;
+		return (table);
+	}
+	return (fill_table(table, (char *)str, c));
 }
