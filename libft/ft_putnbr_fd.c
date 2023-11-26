@@ -65,11 +65,9 @@ void	ft_putnbr_fd(int n, int fd)
 	i = len - 1;
 	while (i >= 0)
 	{
-		num[i] = (n % 10) + 48;
+		num[i] = (n % 10) + '0';
 		n /= 10;
 		i--;
 	}
-	i = -1;
-	while (++i < len)
-		write(fd, &num[i], 1);
+	write(fd, num, len);
 }
