@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 04:18:12 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/24 04:40:15 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:25:26 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen((char *)s) - start;
 	res = (char *)malloc((len + 1) * sizeof(char));
 	if (!res)
-		return (FT_NULL);
+		return (NULL);
 	i = -1;
 	{
 		while (++i < len && s[start] != 0)

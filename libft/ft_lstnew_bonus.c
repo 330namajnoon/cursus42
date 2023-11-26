@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 01:35:43 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/26 01:41:50 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:25:26 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_list	*ft_lstnew(void *content)
 
 	list = (t_list *)malloc(sizeof(t_list));
 	if (!list)
-		return (FT_NULL);
+		return (NULL);
 	list->content = content;
-	list->next = FT_NULL;
+	list->next = NULL;
 	return (list);
 }

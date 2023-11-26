@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 22:13:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/10 22:20:04 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/26 18:24:50 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
-# define FT_NULL ((void *)0)
 
 typedef struct s_list
 {

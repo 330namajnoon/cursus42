@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 10:56:52 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/26 17:00:34 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:25:26 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*ft_strchr(const char *s, int c)
 		if (*s == c)
 			return ((char *)s);
 		if (*s == 0)
-			return (FT_NULL);
+			return (NULL);
 		s++;
 	}
-	return (FT_NULL);
+	return (NULL);
 }

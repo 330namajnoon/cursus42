@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 20:13:23 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/10 22:18:16 by codespace        ###   ########.fr       */
+/*   Updated: 2023/11/26 19:08:19 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,17 @@ char	**fill_table(char **table, char *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**table;
-	int		x_size;
+	int		size;
 	char	*str;
 
 	if (!s)
 		return (NULL);
 	str = (char *)s;
-	x_size = counter(str, c) + 1;
-	table = (char **)ft_calloc(x_size, sizeof(char *));
+	size = counter(str, c) + 1;
+	table = (char **)ft_calloc(size, sizeof(char *));
 	if (!table)
 		return (NULL);
-	if (x_size == 1)
+	if (size == 1)
 	{
 		table[0] = NULL;
 		return (table);

@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:27:03 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/25 21:42:38 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:25:26 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	res = (char *)malloc(((resdata.end - resdata.start) + 1) * sizeof(char));
 	if (!res)
-		return (FT_NULL);
+		return (NULL);
 	vars[0] = resdata.start - 1;
 	vars[1] = -1;
 	while (++vars[0] < resdata.end)
