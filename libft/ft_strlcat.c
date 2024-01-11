@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 01:01:28 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/17 15:58:45 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:24:16 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
@@ -27,5 +28,5 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	}
 	if (i < dstsize)
 		dst[i + j] = '\0';
-	return (i + ft_strlen((char *)src));
+	return (i + ft_strlen(src));
 }

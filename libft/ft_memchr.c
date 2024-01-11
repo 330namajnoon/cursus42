@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:36:28 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/17 15:53:44 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:28:27 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
@@ -22,5 +23,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return ((void *)ss);
 		ss++;
 	}
-	return (FT_NULL);
+	return (NULL);
 }

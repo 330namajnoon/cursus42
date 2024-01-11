@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:27:03 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/25 21:42:38 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:25:04 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ struct s_resdata	get_res_data(char const *str, char const *set)
 	resdata.start = 0;
 	while (str[++vars[0]] != 0 && char_find(str[vars[0]], set))
 		resdata.start++;
-	resdata.end = ft_strlen((char *)str);
-	vars[0] = ft_strlen((char *)str);
+	resdata.end = ft_strlen(str);
+	vars[0] = ft_strlen(str);
 	while (--vars[0] >= 0 && char_find(str[resdata.end - 1], set))
 		resdata.end--;
 	return (resdata);
@@ -57,7 +57,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	res = (char *)malloc(((resdata.end - resdata.start) + 1) * sizeof(char));
 	if (!res)
-		return (FT_NULL);
+		return (NULL);
 	vars[0] = resdata.start - 1;
 	vars[1] = -1;
 	while (++vars[0] < resdata.end)

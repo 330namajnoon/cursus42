@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 04:21:36 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/24 04:25:11 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:24:18 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char			*res;
 	unsigned int	varl[3];
 
-	varl[1] = ft_strlen ((char *)s1);
-	varl[2] = ft_strlen ((char *)s2);
+	varl[1] = ft_strlen (s1);
+	varl[2] = ft_strlen (s2);
 	res = (char *)malloc ((varl[1] + varl[2] + 1) * sizeof (char));
 	if (!res)
-		return (FT_NULL);
+		return (NULL);
 	varl[0] = -1;
 	while (++varl[0] < varl[1] + varl[2])
 	{

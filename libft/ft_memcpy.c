@@ -6,7 +6,7 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 22:57:07 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/09/26 01:00:40 by simajnoo         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:25:26 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	char	*s;
 
 	if (!dst && !src)
-		return (FT_NULL);
+		return (NULL);
 	d = (char *)dst;
 	s = (char *)src;
 	i = -1;
