@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   putstr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/14 18:13:41 by simajnoo          #+#    #+#             */
-/*   Updated: 2024/01/14 20:27:19 by simajnoo         ###   ########.fr       */
+/*   Created: 2024/01/14 20:15:22 by simajnoo          #+#    #+#             */
+/*   Updated: 2024/01/14 20:28:06 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include "./libft/libft.h"
+int	putstrfd(char *str, int fd)
+{
+	int	i;
 
-int		ft_printf(const char *input, ...);
-int		putstrfd(char *str, int fd);
-int		putnbrfd(int nbr, int fd);
-
-#endif
+	i = -1;
+	while (str[++i])
+		write(fd, &str[i], 1);
+	return (i);
+}

@@ -6,26 +6,27 @@
 /*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 18:19:29 by simajnoo          #+#    #+#             */
-/*   Updated: 2024/01/14 19:43:55 by simajnoo         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:28:12 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	putstr(char *str)
-{
-	write(1, str, ft_strlen(str));
-}
-
 int	get_type(char type, void *arg)
 {
+	int	i;
+
+	i = 0;
 	if (type == 's')
-		putstr((char*)arg);
+		i += putstrfd((char*)arg, 1);
 	else if (type == 'd')
-		ft_putnbr_fd((int)arg, 1);
+		i += putnbrfd((int)arg, 1);
 	else if (type == 'c')
+	{
 		ft_putchar_fd((char)arg, 1);
-	return (1);
+		i++;
+	}
+	return (i);
 }
 
 int	ft_printf(const char *input, ...)

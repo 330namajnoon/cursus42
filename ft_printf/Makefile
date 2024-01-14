@@ -6,7 +6,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 LIBFTDIR = ./libft
 
-SRCS = main.c ft_printf.c \
+SRCS = ft_printf.c putnbrfd.c putstrfd.c \
 
 OBJS = $(SRCS:.c=.o)
 
