@@ -16,8 +16,12 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
-int		ft_printf(const char *input, ...);
 int		putstrfd(char *str, int fd);
 int		putnbrfd(int nbr, int fd);
+int     putcharfd(int c, int fd);
+int     putpointerfd(void *ptr, int fd);
+int     putunsigned_decimal_fd(unsigned long number, int fd);
+int     puthexfd(unsigned long number,char *base, int fd);
+int		ft_printf(const char *input, ...);
 
 #endif

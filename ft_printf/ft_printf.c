@@ -12,20 +12,25 @@
 
 #include "ft_printf.h"
 
-int	get_type(char type, void *arg)
+int	get_type(char type, va_list args)
 {
 	int	i;
 
 	i = 0;
 	if (type == 's')
-		i += putstrfd((char*)arg, 1);
-	else if (type == 'd')
-		i += putnbrfd((int)arg, 1);
+		i += putstrfd(va_arg(args, char*), 1);
+	if (type == 'p')
+		i += putpointerfd(va_arg(args, void*), 1);
+	else if (type == 'd' || type == 'i')
+		i += putnbrfd(va_arg(args, int), 1);
 	else if (type == 'c')
-	{
-		ft_putchar_fd((char)arg, 1);
-		i++;
-	}
+		i += putcharfd(va_arg(args, int), 1);
+	else if (type == 'u')
+		i += putunsigned_decimal_fd(va_arg(args, unsigned long), 1);
+	else if (type == 'x')
+		i += puthexfd(va_arg(args, unsigned long), "0123456789abcdef", 1);
+	else if (type == 'X')
+		i += puthexfd(ft_toupper(va_arg(args, unsigned long)), "0123456789ABCDEF", 1);
 	return (i);
 }
 
@@ -44,15 +49,12 @@ int	ft_printf(const char *input, ...)
 		{
 			input++;
 			if (ft_strchr("cspdiuxX", *input))
-				i += get_type(*input, va_arg(args, void*));
+				i += get_type(*input, args);
 			else if (*input == '%')
-			{
-				ft_putchar_fd('%', 1);
-				i++;
-			}
+				i += putcharfd('%', 1);
 		}
 		else
-			write(1, &*input, 1);
+			i += putcharfd(*input, 1);
 		input++;
 	}
 	return (i);

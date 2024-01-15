@@ -16,7 +16,9 @@ int	main(int argn, char *argv[])
 {
 	(void)argn;
 	(void)argv;
-	printf("\n%d", ft_printf("%s : %s %d ,\n", "hola", "mundo", "2024"));
-	//printf("%s : %s %d ,", "hola", "mundo", "2024");
+	//printf("\n%d", ft_printf("%s : %s %d - %c | %p | ,\n", "hola", "mundo", 2024, 'c', "hola"));
+
+	ft_printf("%x\n", 5918);
+	printf("%x", 5918);
 	return (0);
 }
