@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   putcharfd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/16 12:47:32 by codespace         #+#    #+#             */
+/*   Updated: 2024/01/16 12:50:25 by codespace        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int putcharfd(int c, int fd)
+int	putcharfd(int c, int fd)
 {
-    write(fd, &c, 1);
-    return (1);
+	write(fd, &c, 1);
+	return (1);
 }

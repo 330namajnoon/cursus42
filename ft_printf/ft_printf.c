@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 18:19:29 by simajnoo          #+#    #+#             */
-/*   Updated: 2024/01/14 20:28:12 by simajnoo         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:10:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	get_type(char type, va_list args)
 
 	i = 0;
 	if (type == 's')
-		i += putstrfd(va_arg(args, char*), 1);
+		i += putstrfd(va_arg(args, char *), 1);
 	else if (type == 'p')
-		i += putpointerfd(va_arg(args, void*), 1);
+		i += putpointerfd(va_arg(args, void *), "0123456789abcdef", 1);
 	else if (type == 'd' || type == 'i')
 		i += putnbrfd(va_arg(args, int), 1);
 	else if (type == 'c')
