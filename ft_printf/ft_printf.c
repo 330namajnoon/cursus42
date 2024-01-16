@@ -19,25 +19,25 @@ int	get_type(char type, va_list args)
 	i = 0;
 	if (type == 's')
 		i += putstrfd(va_arg(args, char*), 1);
-	if (type == 'p')
+	else if (type == 'p')
 		i += putpointerfd(va_arg(args, void*), 1);
 	else if (type == 'd' || type == 'i')
 		i += putnbrfd(va_arg(args, int), 1);
 	else if (type == 'c')
 		i += putcharfd(va_arg(args, int), 1);
 	else if (type == 'u')
-		i += putunsigned_decimal_fd(va_arg(args, unsigned long), 1);
+		i += putunsigned_decimal_fd(va_arg(args, unsigned int), 1);
 	else if (type == 'x')
-		i += puthexfd(va_arg(args, unsigned long), "0123456789abcdef", 1);
+		i += puthexfd(va_arg(args, unsigned int), "0123456789abcdef", 1);
 	else if (type == 'X')
-		i += puthexfd(ft_toupper(va_arg(args, unsigned long)), "0123456789ABCDEF", 1);
+		i += puthexfd(va_arg(args, unsigned int), "0123456789ABCDEF", 1);
 	return (i);
 }
 
 int	ft_printf(const char *input, ...)
 {
-	int		i;
 	va_list	args;
+	int		i;
 
 	va_start(args, input);
 	i = 0;
@@ -57,5 +57,6 @@ int	ft_printf(const char *input, ...)
 			i += putcharfd(*input, 1);
 		input++;
 	}
+	va_end(args);
 	return (i);
 }

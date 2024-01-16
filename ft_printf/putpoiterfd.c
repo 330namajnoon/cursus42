@@ -12,7 +12,8 @@ int putpointerfd(void *ptr, int fd)
     address = (unsigned long)ptr;
     i = 15;
     digit = 0;
-    buffer[i--] = 0;
+    if (!ptr)
+        return (write(fd, "(nil)", 5));
     while (address != 0 && i >= 0)
     {
         digit = address % 16;

@@ -17,6 +17,11 @@ int	putstrfd(char *str, int fd)
 	int	i;
 
 	i = -1;
+	if (!str)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
 	while (str[++i])
 		write(fd, &str[i], 1);
 	return (i);
