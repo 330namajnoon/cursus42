@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: simajnoo <simajnoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 20:44:20 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 23:11:58 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/29 21:51:19 by simajnoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 char	*ft_strdup(const char *s1)
 {
@@ -33,7 +32,7 @@ char	*ft_strdup(const char *s1)
 	return (s2);
 }
 
-char	*rest_to_res(t_data *data,unsigned int pos)
+char	*rest_to_res(t_data *data, unsigned int pos)
 {
 	char	*res;
 	char	*rest;
@@ -55,11 +54,10 @@ char	*rest_to_res(t_data *data,unsigned int pos)
 	return (res);
 }
 
-
 char	*get_next_line(int fd)
 {
 	static t_data	data;
-	t_vars vs;
+	t_vars			vs;
 
 	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
 		return (FT_NULL);
@@ -84,7 +82,7 @@ char	*get_next_line(int fd)
 			vs.t = -1;
 			while (data.buffer[++vs.t])
 				data.buffer[vs.t] = 0;
-			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest, lo pone en variable rest.
+			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest,lo pone en variable rest.
 			vs.t = -1;
 			vs.i = -1;
 			while (data.rest[++vs.i])
@@ -108,8 +106,15 @@ char	*get_next_line(int fd)
 		else if (vs.b_read == 0)
 		{
 			if (!*data.rest)
-				return (free(data.rest), FT_NULL);
-			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest, lo pone en variable rest.
+			{
+				if (data.rest != NULL)
+				{
+					free(data.rest);
+					data.rest = NULL;
+				}
+				return (FT_NULL);
+			}
+			// llamar a funcion rest_to_res por si hay alguna linea compeleta en data.rest,lo pone en variable rest.
 			vs.t = -1;
 			vs.i = -1;
 			while (data.rest[++vs.i])
