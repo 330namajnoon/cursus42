@@ -29,19 +29,50 @@ typedef struct {
     float z;
 } t_point3d;
 
+typedef struct
+{
+    float x;
+    float y;
+    float z; 
+} t_vector3;
+
 typedef struct {
-    t_point3d start;
-    t_point3d end;
-} t_line;
+    t_vector3 start;
+    t_vector3 end;
+} t_eage;
 
 typedef struct {
     void *mlx_ptr;
     void *win_ptr;
-    t_line  lines[12];
+    t_eage  lines[12];
     t_point3d rotation_point;
     float rotation_x;
     float rotation_y;
     float rotation_z;
 } t_env;
+
+typedef struct 
+{
+    t_vector3   location;
+    int         color;
+} t_map_data;
+
+typedef struct
+{
+    t_list      *map_data;
+    t_list      *eages;
+    t_vector3   rotation;
+    t_vector3   center;
+    int         zoom;
+    void        *mlx;
+    void        *win;
+} t_scene_data;
+
+
+
+t_list	*read_map(char *src, t_list	*map_data);
+t_scene_data	create_scene(t_vector3 center, t_vector3 initial_rotation, int width, int height, char *title);
+t_list	*create_eages(t_list *map_data, t_list *eages);
+int draw(t_scene_data *scene);
 
 #endif
