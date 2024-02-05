@@ -39,6 +39,7 @@ typedef struct
 typedef struct {
     t_vector3 start;
     t_vector3 end;
+    int       color;
 } t_eage;
 
 typedef struct {
@@ -74,5 +75,6 @@ t_list	*read_map(char *src, t_list	*map_data);
 t_scene_data	create_scene(t_vector3 center, t_vector3 initial_rotation, int width, int height, char *title);
 t_list	*create_eages(t_list *map_data, t_list *eages);
 int draw(t_scene_data *scene);
+int get_color(char *hex_num);
 
 #endif

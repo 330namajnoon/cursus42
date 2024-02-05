@@ -59,7 +59,7 @@ void draw_line_3d(t_scene_data *scene)
         while (c->next)
         {
             eage = (t_eage *)c->content;
-            //printf("(%d %d %d)[%d %d %d]", (int)eage->start.x, (int)eage->start.y, (int)eage->start.z, (int)eage->end.x, (int)eage->end.y, (int)eage->end.z);
+            printf("(%d %d %d)[%d %d %d]", (int)eage->start.x, (int)eage->start.y, (int)eage->start.z, (int)eage->end.x, (int)eage->end.y, (int)eage->end.z);
             t_vector3 start_2d = {eage->start.x * scene->zoom, eage->start.y * scene->zoom, 0}; // Proyección simplificada
             t_vector3 end_2d = {eage->end.x * scene->zoom, eage->end.y * scene->zoom, 0};
 
@@ -76,7 +76,9 @@ void draw_line_3d(t_scene_data *scene)
             //printf("(%d %d)[%d %d]", (int)start_2d.x, (int)start_2d.x, (int)end_2d.x, (int)end_2d.y);
             for (int i = 0; i <= steps; i++)
             {
-                mlx_pixel_put(scene->mlx, scene->win, x, y, 0xFFFFFF); // Dibuja en blanco
+                if (eage->color == 0)
+                    eage->color = 0xFFFFFF;
+                mlx_pixel_put(scene->mlx, scene->win, x, y, eage->color); // Dibuja en blanco
                 x += x_inc;
                 y += y_inc;
             }

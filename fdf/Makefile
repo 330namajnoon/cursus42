@@ -4,6 +4,7 @@ SRC = main.c \
  create_eages.c \
  read_map.c \
  draw.c \
+ get_color.c \
  get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libft/libft.a \
 
 
