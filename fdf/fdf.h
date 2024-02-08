@@ -20,8 +20,17 @@
 #include <math.h>
 #include "get_next_line/get_next_line.h"
 #include "libft/libft.h"
+#include <X11/X.h>
 
 #define M_PI 3.14159265358979323846
+
+#define MOUSE_RIGHT 3
+#define MOUSE_LEFT 1
+#define MOUSE_S 2
+#define MOUSE_S_T 4
+#define MOUSE_S_B 5
+
+
 
 typedef struct {
     float x;
@@ -29,12 +38,20 @@ typedef struct {
     float z;
 } t_point3d;
 
+
 typedef struct
 {
     float x;
     float y;
     float z; 
 } t_vector3;
+
+typedef struct
+{
+    int x;
+    int y;
+    int z; 
+} t_vector3_int;
 
 typedef struct {
     t_vector3 start;
@@ -58,10 +75,22 @@ typedef struct
     int         color;
 } t_map_data;
 
+typedef struct {
+    int             is_active;
+    t_vector3_int   pos;
+}   t_mouse_status;
+
+typedef struct {
+    t_mouse_status b_l;
+    t_mouse_status b_r;
+    t_mouse_status b_s;
+} t_mouse;
+
 typedef struct
 {
     t_list      *map_data;
     t_list      *eages;
+    t_mouse     mouse;
     t_vector3   rotation;
     t_vector3   center;
     int         zoom;

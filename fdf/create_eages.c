@@ -5,7 +5,7 @@ int get_eage_color(char *str)
 {
 	char	**split;
 
-	split = ft_split(str, '.'); 
+	split = ft_split(str, ','); 
 	if (split[1])
 	{
 		return (get_color(split[1]));
@@ -20,7 +20,7 @@ float	get_eage_z(char *str)
 {
 	char	**split;
 
-	split = ft_split(str, '.'); 
+	split = ft_split(str, ','); 
 	return ((float)ft_atoi(split[0]));
 }
 
