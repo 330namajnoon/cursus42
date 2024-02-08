@@ -15,6 +15,7 @@
 
 #include "../fdf.h"
 
-
+int	rotate(int axes, int angle, t_scene_data *scene);
+int move(int axes, int force, t_scene_data *scene);
 
 #endif

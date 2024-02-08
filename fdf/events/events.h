@@ -15,6 +15,6 @@
 
 #include "../fdf.h"
 
-
+int key_down_hook(int keycode, t_scene_data *scene);
 
 #endif

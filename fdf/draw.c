@@ -2,71 +2,6 @@
 
 t_env env;
 
-t_vector3 rotate_x(t_vector3 p, float angle)
-{
-    t_vector3 rotated_p;
-    rotated_p.x = p.x;
-    rotated_p.y = p.y * cos(angle) - p.z * sin(angle);
-    rotated_p.z = p.y * sin(angle) + p.z * cos(angle);
-    return rotated_p;
-}
-
-t_vector3 muve_x(t_vector3 p, float force)
-{
-    t_vector3 rotated_p;
-    rotated_p.x = p.x + force;
-    rotated_p.y = p.y;
-    rotated_p.z = p.z;
-    return rotated_p;
-}
-
-t_vector3 rotate_y(t_vector3 p, float angle)
-{
-    t_vector3 rotated_p;
-    rotated_p.x = p.x * cos(angle) + p.z * sin(angle);
-    rotated_p.y = p.y;
-    rotated_p.z = -p.x * sin(angle) + p.z * cos(angle);
-    return rotated_p;
-}
-
-t_vector3 muve_y(t_vector3 p, float force)
-{
-    t_vector3 rotated_p;
-    rotated_p.x = p.x;
-    rotated_p.y = p.y + force;
-    rotated_p.z = p.z;
-    return rotated_p;
-}
-
-t_vector3 rotate_z(t_vector3 p, float angle)
-{
-    t_vector3 rotated_p;
-    rotated_p.x = p.x * cos(angle) - p.y * sin(angle);
-    rotated_p.y = p.x * sin(angle) + p.y * cos(angle);
-    rotated_p.z = p.z;
-    return rotated_p;
-}
-
-t_vector3 muve_z(t_vector3 p, float force)
-{
-    t_vector3 rotated_p;
-    rotated_p.x = p.x;
-    rotated_p.y = p.y;
-    rotated_p.z = p.z + force;
-    return rotated_p;
-}
-
-t_vector3 muve_around_point(t_vector3 p, int axes, float force)
-{
-    if (axes == 'X')
-        p = muve_x(p, force);
-    if (axes == 'Y')
-        p = muve_y(p, force);
-    if (axes == 'Z')
-        p = muve_z(p, force);
-    return p;
-}
-
 
 
 void draw_line_3d(t_scene_data *scene, t_list *c)
@@ -218,49 +153,12 @@ int button_release_hook(int button, int x, int y, t_scene_data *scene)
 
 int mouse_move_hook(int x, int y, t_scene_data *scene)
 {
-    t_list *f;
-    t_list *c;
-    t_eage *eage;
     const float rotation_speed = M_PI / 150;
-    // const int zoom_speed = 1;
-    // if (button == 4)
-    // {
-    //     scene->zoom += zoom_speed;
-    //     draw_lines_3d(scene);
-    // }
-    // else if (button == 5)
-    // {
-    //     scene->zoom -= zoom_speed;
-    //     if (scene->zoom < 1)
-    //         scene->zoom = 1;
-    //     draw_lines_3d(scene);
-    // }
-    // mlx_clear_window(scene->mlx, scene->win);
-    // draw_lines_3d(scene);
     if (scene->mouse.b_l.is_active)
     {
         if (x > scene->mouse.b_l.pos.x)
-        {
-            scene->rotation.y = rotation_speed;
-            f = scene->eages;
-            while (f)
-            {
-                c = f->content;
-                while (c->next)
-                {
-                    eage = (t_eage *)c->content;
-                    eage->start = rotate_around_point(eage->start, scene, 'Y');
-                    eage->end = rotate_around_point(eage->end, scene, 'Y');
-                    draw_line_3d(scene, c);
-                    c = c->next;
-                }
-                f = f->next;
-            }
-            scene->mouse.b_l.pos.x = x;
-        }
+            rotate(x, rotation_speed, scene);
         write(1, ft_itoa(x), ft_strlen(ft_itoa(x)));
-        mlx_clear_window(scene->mlx, scene->win);
-        //draw_lines_3d(scene);
     }
     (void)x;
     (void)y;
@@ -295,7 +193,7 @@ int draw(t_scene_data *scene)
     scene->center.x = x_ofset / 2;
     scene->center.y = y_ofset / 2;
 
-    mlx_hook(scene->win, KeyPress, KeyPressMask, key_hook, scene);
+    mlx_hook(scene->win, KeyPress, KeyPressMask, key_down_hook, scene);
     mlx_hook(scene->win, ButtonPress, ButtonPressMask, button_press_hook, scene);
     mlx_hook(scene->win, ButtonRelease, ButtonReleaseMask, button_release_hook, scene);
     mlx_hook(scene->win, 6, PointerMotionMask, mouse_move_hook, scene);

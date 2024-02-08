@@ -21,6 +21,8 @@
 #include "get_next_line/get_next_line.h"
 #include "libft/libft.h"
 #include <X11/X.h>
+#include "utyls/utyls.h"
+#include "events/events.h"
 
 #define M_PI 3.14159265358979323846
 
