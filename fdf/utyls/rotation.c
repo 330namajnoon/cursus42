@@ -1,65 +1,48 @@
 #include "utyls.h"
 
-t_eage *rotate_x(t_eage *eage, int angle)
+
+t_vector3 rotate_x(t_vector3 p, float angle)
 {
-	t_eage *rotated_eage;
-	rotated_eage->start.x = eage->start.x;
-	rotated_eage->end.x = eage->end.x;
-	rotated_eage->start.y = eage->start.y * cos(angle) - eage->start.z * sin(angle);
-	rotated_eage->end.y = eage->end.y * cos(angle) - eage->end.z * sin(angle);
-	rotated_eage->start.z = eage->start.y * sin(angle) + eage->start.z * cos(angle);
-	rotated_eage->end.z = eage->end.y * sin(angle) + eage->end.z * cos(angle);
-	eage = rotated_eage;
-	return (eage);
+    t_vector3 rotated_p;
+    rotated_p.x = p.x;
+    rotated_p.y = p.y * cos(angle) - p.z * sin(angle);
+    rotated_p.z = p.y * sin(angle) + p.z * cos(angle);
+    return rotated_p;
 }
 
-t_eage	*rotate_y(t_eage *eage, int angle)
+t_vector3 rotate_y(t_vector3 p, float angle)
 {
-	t_eage	*rotated_eage;
-	rotated_eage->start.x = eage->start.x * cos(angle) + eage->start.z * sin(angle);
-	rotated_eage->end.x = eage->end.x * cos(angle) + eage->end.z * sin(angle);
-	rotated_eage->start.y = eage->start.y;
-	rotated_eage->end.y = eage->end.y;
-	rotated_eage->start.z = -eage->start.x * sin(angle) + eage->start.z * cos(angle);
-	rotated_eage->end.z = -eage->end.x * sin(angle) + eage->end.z * cos(angle);
-	eage = rotated_eage;
-	return (eage);
+    t_vector3 rotated_p;
+    rotated_p.x = p.x * cos(angle) + p.z * sin(angle);
+    rotated_p.y = p.y;
+    rotated_p.z = -p.x * sin(angle) + p.z * cos(angle);
+    return rotated_p;
 }
 
-t_eage	*rotate_z(t_eage	*eage, int angle)
+t_vector3 rotate_z(t_vector3 p, float angle)
 {
-	t_eage	*rotated_eage;
-	rotated_eage->start.x = eage->start.x * cos(angle) - eage->start.y * sin(angle);
-	rotated_eage->end.x = eage->end.x * cos(angle) - eage->end.y * sin(angle);
-	rotated_eage->start.y = eage->start.x * sin(angle) + eage->start.y * cos(angle);
-	rotated_eage->end.y = eage->end.x * sin(angle) + eage->end.y * cos(angle);
-	rotated_eage->start.z = eage->start.z;
-	rotated_eage->end.z = eage->end.z;
-	eage = rotated_eage;
-	return (eage);
+    t_vector3 rotated_p;
+    rotated_p.x = p.x * cos(angle) - p.y * sin(angle);
+    rotated_p.y = p.x * sin(angle) + p.y * cos(angle);
+    rotated_p.z = p.z;
+    return rotated_p;
 }
 
-t_eage *rotate_around_point(t_eage *eage, int axes, int angle,t_scene_data *scene)
+t_vector3	rotate_around_point(t_vector3	p, int axes, int angle,t_scene_data *scene)
 {
-	eage->start.x -= scene->center.x;
-	eage->end.x -= scene->center.x;
-	eage->start.y -= scene->center.y;
-	eage->end.y -= scene->center.y;
-	eage->start.z -= scene->center.z;
-	eage->end.z -= scene->center.z;
+	p.x -= scene->center.x;
+	p.y -= scene->center.y;
+	p.z -= scene->center.z;
 	if (axes == 'X')
-		eage = rotate_x(eage, angle);
+		p = rotate_x(p, angle);
 	if (axes == 'Y')
-		eage = rotate_y(eage, angle);
+		p = rotate_x(p, angle);
 	if (axes == 'Z')
-		eage = rotate_y(eage, angle);
-	eage->start.x += scene->center.x;
-	eage->end.x += scene->center.x;
-	eage->start.y += scene->center.y;
-	eage->end.y += scene->center.y;
-	eage->start.z += scene->center.z;
-	eage->end.z += scene->center.z;
-	return (eage);
+		p = rotate_x(p, angle);
+	p.x += scene->center.x;
+	p.y += scene->center.y;
+	p.z += scene->center.z;
+	return (p);
 }
 
 int rotate(int axes, int angle, t_scene_data *scene)
@@ -75,8 +58,12 @@ int rotate(int axes, int angle, t_scene_data *scene)
 		while (c->next)
 		{
 			eage = (t_eage *)c->content;
-			eage = rotate_around_point(eage, axes, angle, scene);
-			draw_line_3d(scene, c);
+			eage->start = rotate_around_point(eage->start,axes, angle, scene);
+			eage->end = rotate_around_point(eage->end, axes, angle, scene);
+			write(1, "(", 1);
+			write(1, ft_itoa(eage->start.y), ft_strlen(ft_itoa(eage->start.y)));
+			write(1, ")", 1);
+			draw_line(scene, c);
 			c = c->next;
 		}
 		f = f->next;

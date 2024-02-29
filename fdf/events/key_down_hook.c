@@ -1,13 +1,11 @@
 #include "events.h"
+#include "../fdf.h"
 
 int key_down_hook(int keycode, t_scene_data *scene)
 {
-    t_list *f;
-    t_list *c;
-    t_eage *eage;
     const float rotation_speed = M_PI / 150;
     const float move_speed = 2;
-    mlx_clear_window(scene->mlx, scene->win);
+    write(1, ft_itoa(keycode), ft_strlen(ft_itoa(keycode)));
     if (keycode == 120)
 		rotate('X', rotation_speed, scene);
     else if (keycode == 121)

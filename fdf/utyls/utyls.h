@@ -14,8 +14,10 @@
 # define UTYLS_H
 
 #include "../fdf.h"
+#include "structs.h"
 
 int	rotate(int axes, int angle, t_scene_data *scene);
 int move(int axes, int force, t_scene_data *scene);
+void draw_line(t_scene_data *scene, t_list *c);
 
 #endif

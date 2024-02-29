@@ -14,6 +14,8 @@
 # define EVENTS_H
 
 #include "../fdf.h"
+#include "../utyls/structs.h"
+
 
 int key_down_hook(int keycode, t_scene_data *scene);
 

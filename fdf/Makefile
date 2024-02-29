@@ -5,6 +5,8 @@ SRC = main.c \
  read_map.c \
  draw.c \
  get_color.c \
+ ./events/key_down_hook.c \
+ ./utyls/position.c ./utyls/rotation.c ./utyls/draw_line.c \
  get_next_line/get_next_line.c get_next_line/get_next_line_utils.c libft/libft.a \
 
 
