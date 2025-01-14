@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 21:06:39 by simajnoo          #+#    #+#             */
-/*   Updated: 2023/10/17 21:47:35 by codespace        ###   ########.fr       */
+/*   Updated: 2025/01/13 16:35:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,5 @@ int	main(int argn, char *argv[])
 		free(res);
 	}
 	close(file);
-	(void)argn;
-	(void)argv;
 	return (0);
 }
