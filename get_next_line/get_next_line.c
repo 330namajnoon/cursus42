@@ -35,7 +35,7 @@ char	*get_next_line(int fd)
 			vars.t = -1;
 			while (data.rest[++vars.i])
 			{
-				if (data.rest[vars.i] == '\n' !! data.rest[vars.i + 1] == '\0')
+				if (data.rest[vars.i] == '\n' || data.rest[vars.i + 1] == '\0')
 				{
 					vars.t = vars.i;
 					break ;
@@ -49,6 +49,10 @@ char	*get_next_line(int fd)
 				free(data.rest);
 				data.rest = vars.cpy;
 				return (vars.res);
+			}
+			else {
+				free(data.rest);
+				return (FT_NULL);
 			}
 		}
 		
