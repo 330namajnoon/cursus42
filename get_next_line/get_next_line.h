@@ -40,18 +40,7 @@ typedef struct	s_vars{
 	char	*res;
 }			t_vars;
 
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-
 char	*get_next_line(int fd);
-t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst);
-char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

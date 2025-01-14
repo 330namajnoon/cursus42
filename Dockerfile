@@ -23,7 +23,7 @@ RUN pipx install norminette
 RUN pipx ensurepath
 
 # Instalar paco
-RUN bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
+RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/WaRtr0/francinette-image/master/install.sh)"
 
 # Crear y configurar directorios para SSH
 RUN mkdir /var/run/sshd

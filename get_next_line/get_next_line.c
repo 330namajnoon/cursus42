@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 	static t_data	data;
 	t_vars			vars;
 
-	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (FT_NULL);
 	while (1)
 	{
@@ -28,11 +28,14 @@ char	*get_next_line(int fd)
 				data.rest = ft_substr(data.buffer, 0, ft_strlen(data.buffer));
 			else
 				data.rest = ft_strjoin(data.rest, data.buffer);
+		}
+		if (data.rest)
+		{
 			vars.i = -1;
 			vars.t = -1;
 			while (data.rest[++vars.i])
 			{
-				if (data.rest[vars.i] == '\n')
+				if (data.rest[vars.i] == '\n' !! data.rest[vars.i + 1] == '\0')
 				{
 					vars.t = vars.i;
 					break ;
@@ -48,10 +51,6 @@ char	*get_next_line(int fd)
 				return (vars.res);
 			}
 		}
-		if (vars.b_read == 0)
-			return (FT_NULL);
-		if (vars.b_read == -1)
-			return (FT_NULL);
+		
 	}
-	return (data.rest);
 }
