@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     python3.11-venv \
     python3-setuptools \
-    pipx
+    pipx \
+    clang
 
 # Instalar norminette
 RUN pipx install norminette

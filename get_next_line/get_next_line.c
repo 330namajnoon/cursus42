@@ -71,7 +71,7 @@ char	*fix_rest(t_data *data, t_vars *vars)
 	return (vars->res);
 }
 
-char	*get_line(t_data *data, t_vars *vars, int fd)
+char	*my_get_line(t_data *data, t_vars *vars, int fd)
 {
 	while (1)
 	{
@@ -106,11 +106,11 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		return (NULL);
 		if (data.rest)
 			free(data.rest);
+		return (NULL);
 	}
-	if (!get_line(&data, &vars, fd))
+	if (!my_get_line(&data, &vars, fd))
 		return (NULL);
 	return (vars.res);
 }
