@@ -14,12 +14,19 @@
 
 char	*join_readed_to_rest(t_data *data, t_vars *vars, int fd)
 {
-	int	i;
-
-	i = -1;
-	while (++i < BUFFER_SIZE)
-		data->buffer[i] = 0;
+	vars->i = -1;
+	while (++vars->i < BUFFER_SIZE)
+		data->buffer[vars->i] = 0;
 	vars->b_read = read(fd, data->buffer, sizeof(data->buffer));
+	if (vars->b_read < 0)
+	{
+		if (data->rest)
+		{
+			free(data->rest);
+			data->rest = NULL;
+		}
+		return (NULL);
+	}
 	if (vars->b_read)
 	{
 		if (!data->rest)
@@ -104,10 +111,13 @@ char	*get_next_line(int fd)
 	static t_data	data;
 	t_vars			vars;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
 	{
 		if (data.rest)
+		{
 			free(data.rest);
+			data.rest = NULL;
+		}
 		return (NULL);
 	}
 	if (!my_get_line(&data, &vars, fd))
