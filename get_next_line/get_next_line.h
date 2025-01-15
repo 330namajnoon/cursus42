@@ -13,27 +13,23 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
-# include <fcntl.h>
-
-# define FT_NULL ((void *)0)
 
 # ifndef BUFFER_SIZE
 
 #  define BUFFER_SIZE 100
 # endif
 
-typedef struct	s_data{
+typedef struct s_data
+{
 	char	buffer[BUFFER_SIZE];
 	char	*rest;
-	char	*cpy;
 	size_t	len;
 }				t_data;
 
-typedef struct	s_vars{
+typedef struct s_vars
+{
 	int		b_read;
 	int		t;
 	int		i;

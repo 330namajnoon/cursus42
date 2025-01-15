@@ -11,20 +11,26 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 int	main(int argn, char *argv[])
 {
-	int		file;
-	char	*res;
+	int				file;
+	char			*res;
+	unsigned int	len;
+	unsigned int	i;
 
+	len = (unsigned int)atoi(argv[2]);
 	file = open(argv[1], 0);
+	i = -1;
 	if (file == -1)
 		return (0);
-	for (size_t i = 0; i < (unsigned int)atoi(argv[2]); i++)
+	while (++i < len)
 	{
 		res = get_next_line(file);
 		if (!res)
-			break;
+			break ;
 		printf("%s", res);
 		free(res);
 	}
@@ -32,32 +38,3 @@ int	main(int argn, char *argv[])
 	(void)argn;
 	return (0);
 }
-
-// void manejarStringEstatico(const char *nuevoTexto) {
-//     static char *stringEstatico = NULL;
-
-//     // Liberar memoria anterior si existe (opcional, en caso de reutilización)
-//     if (stringEstatico != NULL) {
-//         free(stringEstatico);
-//     }
-
-//     // Asignar memoria suficiente para el nuevo texto
-//     stringEstatico = (char *)malloc(strlen(nuevoTexto) + 1);
-//     if (stringEstatico == NULL) {
-//         perror("Error al asignar memoria");
-//         exit(1);
-//     }
-
-//     // Copiar el nuevo texto en el string estático
-//     strcpy(stringEstatico, nuevoTexto);
-
-//     // Imprimir el contenido actual del string
-//     printf("String actual: %s\n", stringEstatico);
-// }
-
-// int main() {
-//     manejarStringEstatico("Hola");
-//     manejarStringEstatico("Mundo dinámico");
-//     manejarStringEstatico("¡Más datos!");
-//     return 0;
-// }

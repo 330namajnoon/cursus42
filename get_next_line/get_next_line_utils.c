@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = ft_strlen((char *)s) - start;
 	res = (char *)malloc((len + 1) * sizeof(char));
 	if (!res)
-		return (FT_NULL);
+		return (NULL);
 	i = -1;
 	{
 		while (++i < len && s[start] != 0)
@@ -55,7 +55,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	varl[2] = ft_strlen ((char *)s2);
 	res = (char *)malloc ((varl[1] + varl[2] + 1) * sizeof (char));
 	if (!res)
-		return (FT_NULL);
+		return (NULL);
 	varl[0] = -1;
 	while (++varl[0] < varl[1] + varl[2])
 	{
