@@ -28,8 +28,9 @@ int	main(int argn, char *argv[])
 		return (0);
 	while (++i < len)
 	{
+		printf("line %d: ", i);
 		res = get_next_line(file);
-		if (!res)
+		if (res == NULL)
 			break ;
 		printf("%s", res);
 		free(res);

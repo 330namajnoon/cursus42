@@ -36,7 +36,7 @@ char	*join_readed_to_rest(t_data *data, t_vars *vars, int fd)
 
 char	*create_line(t_data *data, t_vars *vars)
 {
-	if (vars->t + 1 < (int)ft_strlen(data->rest))
+	if (vars->t + 1 <= (int)ft_strlen(data->rest))
 	{
 		vars->res = ft_substr(data->rest, 0, vars->t);
 		if (!vars->res)

@@ -7,7 +7,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/get_next_line/program",
-            "args": ["get_next_line/file1.txt", "2"],
+            "args": ["get_next_line/file1.txt", "20"],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],
