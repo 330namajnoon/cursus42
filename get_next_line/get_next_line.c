@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*join_readed_to_rest(t_data *data, t_vars *vars, int fd)
+char	*append_buffer_to_rest(t_data *data, t_vars *vars, int fd)
 {
 	vars->i = -1;
 	while (++vars->i < BUFFER_SIZE)
@@ -41,7 +41,7 @@ char	*join_readed_to_rest(t_data *data, t_vars *vars, int fd)
 	return (data->rest);
 }
 
-char	*create_line(t_data *data, t_vars *vars)
+char	*extract_line_from_rest(t_data *data, t_vars *vars)
 {
 	if (vars->t + 1 <= (int)ft_strlen(data->rest))
 	{
@@ -68,7 +68,7 @@ char	*create_line(t_data *data, t_vars *vars)
 	return (vars->res);
 }
 
-char	*fix_rest(t_data *data, t_vars *vars)
+char	*finalize_rest(t_data *data, t_vars *vars)
 {
 	vars->res = ft_substr(data->rest, 0, ft_strlen(data->rest));
 	if (!vars->res)
@@ -78,11 +78,11 @@ char	*fix_rest(t_data *data, t_vars *vars)
 	return (vars->res);
 }
 
-char	*my_get_line(t_data *data, t_vars *vars, int fd)
+char	*read_and_process_line(t_data *data, t_vars *vars, int fd)
 {
 	while (1)
 	{
-		if (!join_readed_to_rest(data, vars, fd))
+		if (!append_buffer_to_rest(data, vars, fd))
 			return (NULL);
 		if (data->rest)
 		{
@@ -97,9 +97,9 @@ char	*my_get_line(t_data *data, t_vars *vars, int fd)
 				}
 			}
 			if (vars->t > -1)
-				return (create_line(data, vars));
+				return (extract_line_from_rest(data, vars));
 			else if (vars->b_read == 0)
-				return (fix_rest(data, vars));
+				return (finalize_rest(data, vars));
 		}
 		else
 			return (NULL);
@@ -120,7 +120,7 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	if (!my_get_line(&data, &vars, fd))
+	if (!read_and_process_line(&data, &vars, fd))
 		return (NULL);
 	return (vars.res);
 }
