@@ -73,3 +73,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	res[varl[0]] = 0;
 	return (res);
 }
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*src;
+	size_t	total;
+
+	total = count * size;
+	src = (char *)malloc(total);
+	if (!src)
+		return (NULL);
+	while (total--)
+		src[total] = 0;
+	return ((void *)src);
+}

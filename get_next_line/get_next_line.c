@@ -17,7 +17,7 @@ char	*append_buffer_to_rest(t_data *data, t_vars *vars, int fd)
 	vars->i = -1;
 	while (++vars->i < BUFFER_SIZE)
 		data->buffer[vars->i] = 0;
-	vars->b_read = read(fd, data->buffer, sizeof(data->buffer));
+	vars->b_read = read(fd, data->buffer, BUFFER_SIZE);
 	if (vars->b_read < 0)
 	{
 		if (data->rest)
@@ -30,11 +30,11 @@ char	*append_buffer_to_rest(t_data *data, t_vars *vars, int fd)
 	if (vars->b_read)
 	{
 		if (!data->rest)
-			data->rest = "";
+			data->rest = (char *)ft_calloc(1, sizeof(char));
 		vars->cpy = ft_strjoin(data->rest, data->buffer);
 		if (!vars->cpy)
 			return (NULL);
-		if (data->rest && data->rest[0] != 0)
+		if (data->rest)
 			free(data->rest);
 		data->rest = vars->cpy;
 	}
@@ -111,7 +111,7 @@ char	*get_next_line(int fd)
 	static t_data	data;
 	t_vars			vars;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (data.rest)
 		{
