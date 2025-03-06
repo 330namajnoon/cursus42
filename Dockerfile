@@ -4,7 +4,7 @@ FROM gcc:latest
 # Crear un directorio para tu proyecto
 WORKDIR /cursus42
 
-# Instalar herramientas adicionales si son necesarias
+# Instalar herramientas necesarias
 RUN apt-get update && apt-get install -y \
     git \
     make \
@@ -17,29 +17,39 @@ RUN apt-get update && apt-get install -y \
     python3.11-venv \
     python3-setuptools \
     pipx \
-    clang
+    clang \
+    libxext-dev \
+    libxrandr-dev \
+    libx11-dev \
+    libbsd-dev \
+    libssl-dev \
+    x11-apps \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Instalar norminette
-RUN pipx install norminette
-RUN pipx ensurepath
+RUN pipx install norminette && pipx ensurepath
 
-# Instalar paco
+# Instalar paco (Francinette para la corrección de proyectos en 42)
 RUN bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
 
-# Crear y configurar directorios para SSH
-RUN mkdir /var/run/sshd
+# Clonar e instalar MiniLibX
+RUN git clone https://github.com/42Paris/minilibx-linux.git /cursus42/minilibx-linux \
+    && cd /cursus42/minilibx-linux \
+    && make \
+    && cp libmlx.a /usr/local/lib/ \
+    && cp mlx.h /usr/local/include/
 
-# Cambiar contraseña del usuario root (puedes usar una personalizada)
-RUN echo 'root:rootpassword' | chpasswd
+# Configurar SSH
+RUN mkdir /var/run/sshd \
+    && echo 'root:rootpassword' | chpasswd \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Permitir acceso root por SSH
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-# Exponer el puerto 22 para SSH
+# Exponer el puerto SSH
 EXPOSE 22
 
-
+# Copiar los archivos de tu proyecto al contenedor
 COPY ./ /cursus42
 
-# Definir el comando por defecto (puedes cambiarlo)
+# Comando por defecto
 CMD ["/usr/sbin/sshd", "-D"]
