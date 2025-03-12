@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  cursus42:
+    build: .
+    container_name: cursus42
+    volumes:
+      - .:/cursus42  # Monta el directorio local en el contenedor
+    ports:
+      - "2222:22"  # Mapea el puerto SSH
+    stdin_open: true
+    tty: true

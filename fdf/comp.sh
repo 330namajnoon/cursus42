@@ -1,0 +1,2 @@
+# gcc -o program main.c -I./minilibx-mac-osx -L./minilibx-mac-osx -lmlx -I./libft -L./libft -lft -framework OpenGL -framework AppKit
+gcc -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit main.c -o program
